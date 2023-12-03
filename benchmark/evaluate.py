@@ -316,13 +316,13 @@ def predict(user_id, rates, model, k = 5):
 
 if __name__ == "__main__":
     # Restore preprocessor
-    with open('models/preprocessor.pkl', 'rb') as inp:
+    with open('movie_recommendation/models/preprocessor.pkl', 'rb') as inp:
         preprocessor = pickle.load(inp)
 
-    final_test_data = pd.read_csv('benchmark/data/evaluation_interm.csv')
+    final_test_data = pd.read_csv('movie_recommendation/benchmark/data/evaluation_interm.csv')
 
     xgb_model = xgb.XGBRegressor(silent=False, n_jobs=13, random_state=15, n_estimators=100)
-    xgb_model.load_model("models/model.json")
+    xgb_model.load_model("movie_recommendation/models/model.json")
 
     y_test = final_test_data['rating']
     x_test = final_test_data.drop(['user_id', 'item_id','rating'], axis=1)
